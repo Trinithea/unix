@@ -13,7 +13,7 @@ if [ "$1" == "--typ" ]; then
                         echo "local socket file"
 		elif [ -p "$2" ]; then
                         echo "named pipe"
-		elif [ -l "$2" ]; then
+		elif [ -L "$2" ]; then
                         echo "symbolic link"
 		fi
 	else
