@@ -1,0 +1,16 @@
+1. Shift nezahdil zadne argumenty, protoze (jak se pise v jeho helpu) probehne uspesne pouze pokud neni zadane cislo n (shift [n]) zaporne nebo neni vetsi nez pocet argumentu, coz je nas pripad.
+
+2. 
+	$#	pocet argumentu
+	${#promenna}	delka promenne
+	${!i}	vraci pouze i-ty argument
+	${promenna:-vyraz}	pokud 'promenna' neni nastavena nebo je prazdna, vypise 'vyraz'
+	
+	${i:a}	vraci vsechny znaky promenne i od pozice a
+	${i:a:b}	vraci b znaku z promenne i od pozice a
+
+	${promenna/vyraz/text}	v retezci 'promenna' najde podretezec 'vyraz' a nahradi jeho prvni vyskyt retezcem 'text'
+	${promenna//vyraz/text}	v retezci 'promenna' najde vsechny podretezce 'vyraz' a nahradi je retezcem 'text'
+		Pozn. Pokud jsou promenna, vyraz a text promenne, tak bere jejich hodnotu, nikoli nazev.
+
+	@ znaci pole vsupnich argumentu, tudiz by mel byt jen v mistech, kde pracujeme se vstupnimi argumenty. V tomto konkretnim pripade zajistuje, ze se a prepise na B i ve vsech ostatnich argumentech a ne jen v tom prvnim.	 
