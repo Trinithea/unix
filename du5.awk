@@ -11,7 +11,12 @@ BEGIN {
 		if ($i ~ /[Hh][Rr][Ee][Ff]/) {
 	#		print $i
 				if ($i ~ /=/) { 
-					
+					if($i ~ /=[^ ][^\n]/) {
+						split($i,A,"=")
+						split(A[2],B,">")
+						print B[1]
+						next
+					}	
 					if($i ~ /'/) {
 						split($i,A,"\'")
 						print A[2]
