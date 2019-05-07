@@ -7,3 +7,5 @@ awk -F ";" '{ if ( $2 == $NF ) {
 		print $2
 	}
 }' Sorted
+
+rm couSort.csv kodSort.csv Sorted
