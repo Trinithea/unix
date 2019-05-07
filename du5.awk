@@ -26,7 +26,7 @@ BEGIN {
 					gsub("&quot;", "\"", l)
 					gsub("&lt;", "<", l)
 					gsub("&gt;", ">", l)
-					gsub("&amp;", "&", l)
+					gsub("&amp;", "\&", l)
 					print l 
 					next
 	 			}
