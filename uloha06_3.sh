@@ -12,3 +12,5 @@ if(i==1) { n=$5; i=i+1 }
 	 	print $1 	
 	}
 }' pomSorted
+
+rm pom pomSorted
