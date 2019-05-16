@@ -2,12 +2,13 @@
 
 BEGIN {
 	RS="<"
-	FS="\""
 }
 
 /^[Aa] / {
+	gsub("'","\"")
+	FS="\""
 	for (i = 1; i<= NF; ++i) {
-		#print i
+	#	print $i
 		if ($i ~ /[Hh][Rr][Ee][Ff]/) {
 	#		print $i
 				if ($i ~ /=/) { 
@@ -17,11 +18,11 @@ BEGIN {
 						print B[1]
 						next
 					}	
-					if($i ~ /'/) {
-						split($i,A,"\'")
-						print A[2]
-						next
-					}
+	#				if($i ~ /'/) {
+	#					split($i,A,"\'")
+	#					print A[2]
+	#					next
+	#				}
 					l = $ (i + 1)
 					gsub("&quot;", "\"", l)
 					gsub("&lt;", "<", l)
