@@ -1,4 +1,4 @@
-
+JeR="0"
 ZpracujAdresar() {
 	ls "$1" > pom
 	cat pom
@@ -9,17 +9,17 @@ ZpracujAdresar() {
 		else
 			echo $JeR
 			if [[ "$JeR" == "-r" ]]; then
-				if [[ "$p" =~ [^A-Z]+ ]]; then
+				if ! [[ "$p" =~ [A-Z] ]]; then
 					nove=`awk '{ print toupper($0); }' <<< "$p"`
 				fi
-			elif [[ "$p" =~ [^a-z]+ ]]; then
+			elif ! [[ "$p" =~ [a-z] ]]; then
 				nove=`awk '{ print tolower($0); }' <<< "$p"`
 				echo "nove:" $nove
 			fi
 			if [ -e "$1"/"$nove" ]; then
-				echo "Chyba! Kolize u souboru" "$nove" >&2
+				echo "Chyba! Kolize u souboru $nove" >&2
 			else
-				mv "$1"/"$p" "$nove"
+				mv "$1"/"$p" "$1"/"$nove"
 				echo "uspech"
 			fi
 		fi
