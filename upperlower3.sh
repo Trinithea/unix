@@ -1,21 +1,28 @@
 
 ZpracujAdresar() {
-	pom=$( ls "$1" )
+	ls "$1" > pom
+	cat pom
 	while read p; do
 		if [ -d "$1"/"$p" ]; then
+			echo "$p" "je adresar"
 			ZpracujAdresar "$1"/"$p"
 		else
+			echo $JeR
 			if [[ "$JeR" == "-r" ]]; then
 				if [[ "$p" =~ [^A-Z]+ ]]; then
 					nove=`awk '{ print toupper($0); }' <<< "$p"`
 				fi
 			elif [[ "$p" =~ [^a-z]+ ]]; then
 				nove=`awk '{ print tolower($0); }' <<< "$p"`
+				echo "nove:" $nove
 			fi
 			if [ -e "$1"/"$nove" ]; then
 				echo "Chyba! Kolize u souboru" "$nove" >&2
 			else
 				mv "$1"/"$p" "$nove"
+				echo "uspech"
+			fi
+		fi
 	done < pom
 }
 
@@ -36,6 +43,7 @@ if [ -n "$1" ]; then
 	fi
 else 
 	path=$(pwd)
+	#echo $path	
 	ZpracujAdresar "$path"
 fi
 	
