@@ -1,26 +1,21 @@
 JeR="0"
 ZpracujAdresar() {
-	ls "$1" > pom
-	cat pom
-	while read p; do
-		if [ -d "$1"/"$p" ]; then
-			echo "$p" "je adresar"
-			ZpracujAdresar "$1"/"$p"
-		else
-			echo $JeR
+	find $1 > pom
+	while read line; do
+		p=`echo $line | awk -F "\/" '{ print $NF }'`
+	       	path=`echo $line | awk -F "\/" 'BEGIN { OFS="/"} { $NF=""; print $0 }'`	
+		if ! [[ -d "$path"/"$p" ]]; then
 			if [[ "$JeR" == "-r" ]]; then
-				if ! [[ "$p" =~ [A-Z] ]]; then
+				! [[ "$p" =~ [A-Z] ]] || continue
 					nove=`awk '{ print toupper($0); }' <<< "$p"`
-				fi
-			elif ! [[ "$p" =~ [a-z] ]]; then
-				nove=`awk '{ print tolower($0); }' <<< "$p"`
-				echo "nove:" $nove
-			fi
-			if [ -e "$1"/"$nove" ]; then
+			else 
+				! [[ "$p" =~ [a-z] ]] || continue
+					nove=`awk '{ print tolower($0); }' <<< "$p"`
+			fi			
+			if [ -e "$path"/"$nove" ]; then
 				echo "Chyba! Kolize u souboru $nove" >&2
 			else
-				mv "$1"/"$p" "$1"/"$nove"
-				echo "uspech"
+				mv "$path"/"$p" "$path"/"$nove"
 			fi
 		fi
 	done < pom
@@ -47,4 +42,4 @@ else
 	ZpracujAdresar "$path"
 fi
 	
-
+rm pom
